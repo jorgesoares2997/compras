@@ -96,7 +96,7 @@ const PatrimoyCarrousel = ({ itens }: CarrouselProps) => {
                   </div>
                   <div className="bg-[#383838] text-[#FFFFFF87] text-[12px] xxs:text-[14px] flex items-center px-2 gap-2 rounded-2xl h-[32px]">
                     <span>
-                      <a href={item.link}>Link</a>{" "}
+                      <a target="_blank" href={item.link}>Link</a>{" "}
                     </span>
                   </div>
                 </div>
