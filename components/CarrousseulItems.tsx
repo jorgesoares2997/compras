@@ -74,7 +74,7 @@ const PatrimoyCarrousel = ({ itens }: CarrouselProps) => {
                   <Image
                     src={item.image}
                     alt="imagem"
-                    className="rounded-t-xl flex justify-center object-fill"
+                    className="rounded-t-xl h-full flex justify-center object-cover"
                   />
                 </div>
                 <div className="flex flex-col p-2 h-[160px] justify-around lg:w-[320px] sm:h-[240] lg:h-[180px]">
@@ -91,8 +91,8 @@ const PatrimoyCarrousel = ({ itens }: CarrouselProps) => {
                     </div>
                   </div>
                 </div>
-                <div className="flex justify-around absolute mx-4 w-[280px]">
-                  <div className="bg-[#383838] text-[12px] xxs:text-[14px] text-[#FFFFFF87] flex items-center px-2 gap-2 rounded-2xl h-[32px]">
+                <div className="flex justify-between px-4 w-full">
+                  <div className="bg-[#383838]  text-[12px] xxs:text-[14px] text-[#FFFFFF87] flex items-center px-2 gap-2 rounded-2xl h-[32px]">
                     <span>{item.price}</span>
                   </div>
                   <div className="bg-[#383838] text-[#FFFFFF87] text-[12px] xxs:text-[14px] flex items-center px-2 gap-2 rounded-2xl h-[32px]">
