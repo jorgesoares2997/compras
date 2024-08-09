@@ -1,12 +1,12 @@
-import imagem from "../../../public/next.svg";
-import Headset from "../../../public/assets/images/headset.webp";
-import xlr from "../../../public/assets/images/xlr.webp";
-import carregador from "../../../public/assets/images/carregador.webp";
-import fone from "../../../public/assets/images/fone.webp";
-import tampa from "../../../public/assets/images/tampa.webp";
-import canaleta from "../../../public/assets/images/canaleta.webp";
-import capa from "../../../public/assets/images/capa.webp";
-import medusa from "../../../public/assets/images/medusa.webp";
+
+import Headset from "../public/assets/images/headset.webp";
+import xlr from "../public/assets/images/xlr.webp";
+import carregador from "../public/assets/images/carregador.webp";
+import fone from "../public/assets/images/fone.webp";
+import tampa from "../public/assets/images/tampa.webp";
+import canaleta from "../public/assets/images/canaleta.webp";
+import capa from "../public/assets/images/capa.webp";
+import medusa from "../public/assets/images/medusa.webp";
 
 import PatrimonyCarrousel from "./CarrousseulItems";
 const things = [

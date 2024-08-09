@@ -62,6 +62,7 @@ const slideResponsive = {
 };
 
 const PatrimoyCarrousel = ({ itens }: CarrouselProps) => {
+  ssr:false
   return (
     <>
       <Swiper modules={[Navigation]} navigation breakpoints={slideResponsive}>
