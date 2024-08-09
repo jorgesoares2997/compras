@@ -1,4 +1,4 @@
-import { PatrimonyCard } from "@/pages/items/Items";
+import  PatrimonyCard  from "@/pages/items/Items";
 
 export default function Home() {
   return (

@@ -92,7 +92,7 @@ const things = [
   },
 ];
 
-export const PatrimonyCard = () => {
+const PatrimonyCard = () => {
   return (
     <>
       <div className="bg-[#999] w-full size-44">
@@ -101,3 +101,5 @@ export const PatrimonyCard = () => {
     </>
   );
 };
+
+export default PatrimonyCard;
