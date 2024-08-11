@@ -16,7 +16,7 @@ interface Item {
   subtitle?: string;
   local?: string;
   image?: any;
-  price?: string;
+  price?: number;
   urgency?: string;
   link?: string;
 }
@@ -93,7 +93,7 @@ const PatrimoyCarrousel = ({ itens }: CarrouselProps) => {
                 </div>
                 <div className="flex justify-between px-4 w-full">
                   <div className="bg-[#383838]  text-[12px] xxs:text-[14px] text-[#FFFFFF87] flex items-center px-2 gap-2 rounded-2xl h-[32px]">
-                    <span>{item.price}</span>
+                    <span>R$ {item.price},00</span>
                   </div>
                   <div className="bg-[#383838] text-[#FFFFFF87] text-[12px] xxs:text-[14px] flex items-center px-2 gap-2 rounded-2xl h-[32px]">
                     <span>
