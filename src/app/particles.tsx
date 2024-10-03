@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 
 import { loadFull } from "tsparticles";
+import { Container } from "postcss";
 export default function Particle() {
   const [init, setInit] = useState(false);
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function Particle() {
       {init && (
         <Particles
           id="tsparticles"
-          particlesLoaded={particlesLoaded}
+          // particlesLoaded={particlesLoaded}
           style={{
             zIndex: 1,
           }}
@@ -37,7 +38,7 @@ export default function Particle() {
                   enable: true,
                   mode: "repulse",
                 },
-                resize: true,
+                // resize: true,
               },
               modes: {
                 push: {
@@ -73,7 +74,7 @@ export default function Particle() {
               number: {
                 density: {
                   enable: true,
-                  area: 800,
+                  // area: 800,
                 },
                 value: 160,
               },

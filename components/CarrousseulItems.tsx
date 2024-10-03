@@ -164,11 +164,12 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
               backgroundColor: "#F2D4AE",
               overlayColor: "rgba(0, 0, 0, 0.2)",
               primaryColor: "#02732A",
-              textColor: "#004a14",
+              textColor: "#000",
             },
           }}
           disableScrolling
-          showProgress
+          spotlightClicks
+          disableCloseOnEsc
           showSkipButton
           run={true} // Executa o tour baseado no estado
           callback={(data: CallBackProps) => {
