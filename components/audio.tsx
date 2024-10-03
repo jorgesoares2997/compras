@@ -1,3 +1,4 @@
+"use client";
 import Headset from "../public/assets/images/headset.webp";
 import xlr from "../public/assets/images/xlr.webp";
 import carregador from "../public/assets/images/carregador.webp";
@@ -6,7 +7,9 @@ import tampa from "../public/assets/images/tampa.webp";
 import canaleta from "../public/assets/images/canaleta.webp";
 import capa from "../public/assets/images/capa.webp";
 import medusa from "../public/assets/images/medusa.webp";
+import espuma from "../public/assets/images/espuma.webp";
 import PatrimonyCarrousel from "./CarrousseulItems";
+import { useState } from "react";
 
 const things = [
   {
@@ -89,27 +92,39 @@ const things = [
     urgency: "urgente",
     link: "https://produto.mercadolivre.com.br/MLB-1025399907-case-estojo-para-teclado-yamaha-mx61-kromus-_JM#position=3&search_layout=stack&type=item&tracking_id=aa920082-8c84-433b-8e7c-be94987b2093",
   },
+  {
+    id: 9,
+    title: "Espumas microfone headset",
+    subtitle: "Espumas para reposição do microfone lapela",
+    local: "prazeres",
+    image: espuma,
+    price: 15,
+    urgency: "urgente",
+    link: "https://produto.mercadolivre.com.br/MLB-3734876012-espuma-de-microfone-headset-lapela-15x8mm-cor-bege-_JM?searchVariation=178878467867#polycard_client=search-nordic&searchVariation=178878467867&position=30&search_layout=stack&type=item&tracking_id=d6c1a8ed-bca8-4471-85b4-5991582dce8b",
+  },
 ];
+const AudioCard = () => {
+  const [run, setRun] = useState(true); // Controla o estado do tour
 
-const maxPrice = Math.max(...things.map((thing) => thing.price));
+  const steps = [
+    {
+      target: ".carrousel-container", // Target do elemento do Carrousseul
+      content: "Aqui você pode ver os itens mais urgentes e caros.",
+    },
+    {
+      target: ".item-1", // Target para o primeiro item
+      content: "Esse é o item de maior prioridade e valor no momento.",
+    },
+    // Adicione mais etapas conforme necessário
+  ];
 
-const maxItemIndex = things.findIndex((thing) => thing.price === maxPrice);
-
-const [maxItem] = things.splice(maxItemIndex, 1);
-
-things.sort((a, b) => b.price - a.price);
-
-things.unshift(maxItem);
-
-const PatrimonyCard = () => {
   return (
     <>
-      <div className="bg-[#999] w-full size-44">
-        <PatrimonyCarrousel itens={things} />
-        <h1></h1>
+      <div className="bg-transparent w-full size-44 carrousel-container">
+        <PatrimonyCarrousel ableTutorial={true} itens={things} />
       </div>
     </>
   );
 };
 
-export default PatrimonyCard;
+export default AudioCard;
