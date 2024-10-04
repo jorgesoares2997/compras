@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import Joyride, { CallBackProps } from "react-joyride"; // Importa o react-joyride
+import Joyride, { CallBackProps } from "react-joyride";
 import { useState, useEffect } from "react";
 
 interface Item {
@@ -24,6 +24,7 @@ interface Item {
 
 interface CarrouselProps {
   itens: Item[];
+  ableTutorial?: boolean;
 }
 
 const slideResponsive = {
@@ -62,58 +63,34 @@ const slideResponsive = {
   },
 };
 
-const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
-  const [runTour, setRunTour] = useState(true);
-
-  useEffect(() => {
-    setRunTour(true);
-  }, []);
-
+const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps) => {
+  const [isTourVisible, setIsTourVisible] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    const hasSeenTour = localStorage.getItem("hasSeenTour");
+    if (!hasSeenTour && ableTutorial) {
+      setIsTourVisible(true);
+    }
     setIsClient(true);
-  }, []);
+  }, [ableTutorial]);
+
+  const handleJoyrideCallback = (data: CallBackProps) => {
+    const { status } = data;
+    const finishedStatuses = ["finished", "skipped"];
+    if (finishedStatuses.includes(status)) {
+      localStorage.setItem("hasSeenTour", "true");
+      setIsTourVisible(false);
+    }
+  };
 
   if (!isClient) {
     return null;
   }
 
-  // const steps = [
-  //   {
-  //     disableBeacon: true,
-  //     placement: "center",
-  //     target: "body",
-  //     content: (
-  //       <>
-  //         <strong>Bem vindo, esse é o site de compras IBP,</strong>
-  //         <p>Siga o Tutorial para não ter dúvidas sobre as informações.</p>
-  //       </>
-  //     ),
-  //   },
-  //   {
-  //     target: ".joyride-title",
-  //     content: "Aqui está o nome item.",
-  //   },
-  //   {
-  //     target: ".joyride-subtitle",
-  //     content: "Esta é a descrição do item.",
-  //   },
-  //   {
-  //     target: ".joyride-price",
-  //     content:
-  //       " Aqui você pode ver o valor do item no momento da documentação.",
-  //   },
-  //   {
-  //     target: ".joyride-link",
-  //     content:
-  //       "Aqui você pode clicar para ser redirecionado ao anuncio do item no mercado livre.",
-  //   },
-  // ];
-
   return (
     <>
-      {ableTutorial ? (
+      {isTourVisible && (
         <Joyride
           hideCloseButton
           steps={[
@@ -123,16 +100,16 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
               target: "body",
               content: (
                 <>
-                  <strong>Bem vindo, esse é o site de compras IBP,</strong>
+                  <strong>Bem-vindo, esse é o site de compras IBP,</strong>
                   <p>
-                    Siga o Tutorial para não ter dúvidas sobre as informações.
+                    Siga o tutorial para não ter dúvidas sobre as informações.
                   </p>
                 </>
               ),
             },
             {
               target: ".joyride-title",
-              content: "Aqui está o nome item.",
+              content: "Aqui está o nome do item.",
             },
             {
               target: ".joyride-subtitle",
@@ -141,12 +118,12 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
             {
               target: ".joyride-price",
               content:
-                " Aqui você pode ver o valor do item no momento da documentação.",
+                "Aqui você pode ver o valor do item no momento da documentação.",
             },
             {
               target: ".joyride-link",
               content:
-                "Aqui você pode clicar para ser redirecionado ao anuncio do item no mercado livre.",
+                "Clique aqui para ser redirecionado ao anúncio do item no Mercado Livre.",
             },
           ]}
           continuous
@@ -171,19 +148,15 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
           spotlightClicks
           disableCloseOnEsc
           showSkipButton
-          run={true} // Executa o tour baseado no estado
-          callback={(data: CallBackProps) => {
-            if (data.status === "finished" || data.status === "skipped") {
-              setRunTour(false); // Finaliza o tour quando concluído ou ignorado
-            }
-          }}
+          run={isTourVisible}
+          callback={handleJoyrideCallback}
         />
-      ) : null}
+      )}
       <Swiper modules={[Navigation]} navigation breakpoints={slideResponsive}>
-        {itens.map((item: any) => (
+        {itens.map((item: Item) => (
           <SwiperSlide key={item.id}>
             <div className="flex flex-col items-center justify-center">
-              <div className="bg-[#F2D4AE] w-[260px] xxs:w-[280px] h-[330px] lg:w-[308px] lg:h-[360px] rounded-xl shadow-md pb-4 ">
+              <div className="bg-[#F2D4AE] w-[260px] xxs:w-[280px] h-[330px] lg:w-[308px] lg:h-[360px] rounded-xl shadow-md pb-4">
                 <div className="flex items-center justify-center lg:h-[125px] h-[120px]">
                   <Image
                     src={item.image}
@@ -206,7 +179,7 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
                   </div>
                 </div>
                 <div className="flex justify-between px-4 w-full">
-                  <div className="bg-[#AEBF8A]  text-[12px] xxs:text-[14px] text-[#000] flex items-center px-2 gap-2 rounded-2xl h-[32px] joyride-price">
+                  <div className="bg-[#AEBF8A] text-[12px] xxs:text-[14px] text-[#000] flex items-center px-2 gap-2 rounded-2xl h-[32px] joyride-price">
                     <span>R$ {item.price},00</span>
                   </div>
                   <div className="bg-[#AEBF8A] text-[#000] text-[12px] xxs:text-[14px] flex items-center px-2 gap-2 rounded-2xl h-[32px] joyride-link">
