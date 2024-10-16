@@ -10,6 +10,7 @@ import canaleta from "../public/assets/images/canaleta.webp";
 import capa from "../public/assets/images/capa.webp";
 import medusa from "../public/assets/images/medusa.webp";
 import espuma from "../public/assets/images/espuma.webp";
+import Image from "next/image";
 
 // Componente para renderizar um item do carrossel
 const CarouselItem = ({
@@ -23,7 +24,7 @@ const CarouselItem = ({
   link,
 }: any) => (
   <div className={`item-${id}`}>
-    <img src={image.src} alt={title} />
+    <Image src={image.src} alt={title} height={100} width={100} />
     <h3>{title}</h3>
     <p>{subtitle}</p>
     <span>{local}</span>

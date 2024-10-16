@@ -10,7 +10,6 @@ import dvi from "../public/assets/images/dvi.webp";
 import radio from "../public/assets/images/radio.webp";
 import PatrimonyCarrousel from "./CarrousseulItems";
 
-// Dados dos itens a serem exibidos no carrossel
 const things = [
   {
     id: 1,

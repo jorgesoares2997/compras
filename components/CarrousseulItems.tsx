@@ -91,12 +91,6 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
     }
   }, []);
 
-  const finishedStatuses = ["finished", "skipped"];
-  if (finishedStatuses.includes(status)) {
-    localStorage.setItem("hasSeenTour", "true");
-    setIsTourVisible(false);
-  }
-
   useEffect(() => {
     setIsClient(true);
   }, []);
