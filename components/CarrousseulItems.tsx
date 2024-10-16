@@ -24,7 +24,6 @@ interface Item {
 
 interface CarrouselProps {
   itens: Item[];
-  ableTutorial?: boolean;
 }
 
 const slideResponsive = {
@@ -63,26 +62,44 @@ const slideResponsive = {
   },
 };
 
-const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps) => {
+const getUrgencyColor = (urgency: string | undefined) => {
+  switch (urgency) {
+    case "high":
+      return "bg-red-500";
+    case "medium":
+      return "bg-yellow-500";
+    case "low":
+      return "bg-blue-500";
+    default:
+      return "bg-gray-400";
+  }
+};
+
+const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
+  const [runTour, setRunTour] = useState(true);
   const [isTourVisible, setIsTourVisible] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setRunTour(true);
+  }, []);
+
+  useEffect(() => {
     const hasSeenTour = localStorage.getItem("hasSeenTour");
-    if (!hasSeenTour && ableTutorial) {
+    if (!hasSeenTour) {
       setIsTourVisible(true);
     }
-    setIsClient(true);
-  }, [ableTutorial]);
+  }, []);
 
-  const handleJoyrideCallback = (data: CallBackProps) => {
-    const { status } = data;
-    const finishedStatuses = ["finished", "skipped"];
-    if (finishedStatuses.includes(status)) {
-      localStorage.setItem("hasSeenTour", "true");
-      setIsTourVisible(false);
-    }
-  };
+  const finishedStatuses = ["finished", "skipped"];
+  if (finishedStatuses.includes(status)) {
+    localStorage.setItem("hasSeenTour", "true");
+    setIsTourVisible(false);
+  }
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   if (!isClient) {
     return null;
@@ -90,7 +107,7 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps) => {
 
   return (
     <>
-      {isTourVisible && (
+      {ableTutorial && !isTourVisible ? (
         <Joyride
           hideCloseButton
           steps={[
@@ -100,30 +117,33 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps) => {
               target: "body",
               content: (
                 <>
-                  <strong>Bem-vindo, esse é o site de compras IBP,</strong>
+                  <strong>Bem-vindo ao portal de compras da IBP.</strong>
                   <p>
-                    Siga o tutorial para não ter dúvidas sobre as informações.
+                    Siga este guia para entender melhor as funcionalidades e
+                    detalhes dos itens apresentados.
                   </p>
                 </>
               ),
             },
             {
               target: ".joyride-title",
-              content: "Aqui está o nome do item.",
+              content:
+                "Este campo exibe o título do produto, facilitando a identificação rápida.",
             },
             {
               target: ".joyride-subtitle",
-              content: "Esta é a descrição do item.",
+              content:
+                "Aqui você encontrará uma breve descrição, fornecendo detalhes essenciais sobre o item.",
             },
             {
               target: ".joyride-price",
               content:
-                "Aqui você pode ver o valor do item no momento da documentação.",
+                "Este valor representa o preço atual do produto conforme registrado em nossa documentação.",
             },
             {
               target: ".joyride-link",
               content:
-                "Clique aqui para ser redirecionado ao anúncio do item no Mercado Livre.",
+                "Clique aqui para ser direcionado ao anúncio completo do produto, disponível no Mercado Livre.",
             },
           ]}
           continuous
@@ -148,15 +168,19 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps) => {
           spotlightClicks
           disableCloseOnEsc
           showSkipButton
-          run={isTourVisible}
-          callback={handleJoyrideCallback}
+          run={true}
+          callback={(data: CallBackProps) => {
+            if (data.status === "finished" || data.status === "skipped") {
+              setRunTour(false);
+            }
+          }}
         />
-      )}
+      ) : null}
       <Swiper modules={[Navigation]} navigation breakpoints={slideResponsive}>
-        {itens.map((item: Item) => (
+        {itens.map((item: any) => (
           <SwiperSlide key={item.id}>
             <div className="flex flex-col items-center justify-center">
-              <div className="bg-[#F2D4AE] w-[260px] xxs:w-[280px] h-[330px] lg:w-[308px] lg:h-[360px] rounded-xl shadow-md pb-4">
+              <div className="bg-[#F2D4AE] w-[260px] xxs:w-[280px] h-[330px] lg:w-[308px] lg:h-[360px] rounded-xl shadow-md pb-4 ">
                 <div className="flex items-center justify-center lg:h-[125px] h-[120px]">
                   <Image
                     src={item.image}
@@ -166,10 +190,16 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps) => {
                 </div>
                 <div className="flex flex-col p-2 h-[160px] justify-around lg:w-[320px] sm:h-[240] lg:h-[180px]">
                   <div className="flex flex-col p-2">
-                    <div className="mb-2">
+                    <div className="mb-2 flex items-center">
                       <h1 className="text-sm lg:text-base font-bold text-[#000] joyride-title">
                         {item.title}
                       </h1>
+                      <div
+                        className={`ml-2 w-3 h-3 rounded-full ${getUrgencyColor(
+                          item.urgency
+                        )}`}
+                        title={`Urgency: ${item.urgency}`}
+                      ></div>
                     </div>
                     <div>
                       <p className="text-sm my-2 text-[#444] joyride-subtitle">
@@ -179,7 +209,7 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps) => {
                   </div>
                 </div>
                 <div className="flex justify-between px-4 w-full">
-                  <div className="bg-[#AEBF8A] text-[12px] xxs:text-[14px] text-[#000] flex items-center px-2 gap-2 rounded-2xl h-[32px] joyride-price">
+                  <div className="bg-[#AEBF8A]  text-[12px] xxs:text-[14px] text-[#000] flex items-center px-2 gap-2 rounded-2xl h-[32px] joyride-price">
                     <span>R$ {item.price},00</span>
                   </div>
                   <div className="bg-[#AEBF8A] text-[#000] text-[12px] xxs:text-[14px] flex items-center px-2 gap-2 rounded-2xl h-[32px] joyride-link">
