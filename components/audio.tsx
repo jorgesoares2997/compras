@@ -51,9 +51,9 @@ const things = [
   },
   {
     id: 2,
-    title: "Cabos Balanceados",
+    title: "Cabos Balanceados x 5",
     subtitle:
-      "Essenciais para reposição de cabos ausentes, garantindo sinal limpo e sem ruídos.",
+      "Essenciais para reposição de cabos ausentes, garantindo sinal limpo e sem ruídos, os ideais são os de 5 metros.",
     local: "Prazeres",
     image: xlr,
     price: 78,
