@@ -100,6 +100,7 @@ const things = [
     price: 140,
     urgency: "high",
     link: "https://produto.mercadolivre.com.br/MLB-4055736358-radio-comunicador-bf-777s-baofeng-bandas-de-frequncia-16-_JM#position=35&search_layout=stack&type=item&tracking_id=dcc63f3f-dedd-4537-9497-05248317c502",
+    mostUrgent: true,
   },
 ];
 

@@ -22,6 +22,7 @@ const CarouselItem = ({
   price,
   urgency,
   link,
+  mostUrgent,
 }: any) => (
   <div className={`item-${id}`}>
     <Image src={image.src} alt={title} height={100} width={100} />
@@ -58,6 +59,7 @@ const things = [
     price: 78,
     urgency: "high",
     link: "https://produto.mercadolivre.com.br/MLB-4353669688-cabo-microfone-balanceado-santo-angelo-xlr-457m-_JM",
+    mostUrgent: true,
   },
   {
     id: 3,

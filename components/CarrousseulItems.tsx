@@ -9,7 +9,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Joyride, { CallBackProps } from "react-joyride";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useCarrouselStore } from "@/store/tutorial-store";
 
 interface Item {
   id?: number;
@@ -20,6 +21,7 @@ interface Item {
   price?: number;
   urgency?: string;
   link?: string;
+  mostUrgent?: boolean;
 }
 
 interface CarrouselProps {
@@ -75,30 +77,49 @@ const getUrgencyColor = (urgency: string | undefined) => {
   }
 };
 
-const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
-  const [runTour, setRunTour] = useState(true);
-  const [isTourVisible, setIsTourVisible] = useState(false);
-  const [isClient, setIsClient] = useState(false);
+const PatrimonyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
+  const {
+    runTour,
+    isTourVisible,
+    isClient,
+    setRunTour,
+    setIsTourVisible,
+    setIsClient,
+  } = useCarrouselStore();
 
   useEffect(() => {
     setRunTour(true);
-  }, []);
+  }, [setRunTour]);
 
   useEffect(() => {
     const hasSeenTour = localStorage.getItem("hasSeenTour");
     if (!hasSeenTour) {
       setIsTourVisible(true);
     }
-  }, []);
+  }, [setIsTourVisible]);
 
   useEffect(() => {
     setIsClient(true);
-  }, []);
+  }, [setIsClient]);
 
   if (!isClient) {
     return null;
   }
 
+  const totalPrice = itens.reduce(
+    (acc: any, item: { price: any }) => acc + (item.price || 0),
+    0
+  );
+  const mostExpensive = itens.reduce(
+    (prev: { price: any }, curr: { price: any }) =>
+      prev.price! > curr.price! ? prev : curr
+  );
+  const cheapest = itens.reduce((prev: { price: any }, curr: { price: any }) =>
+    prev.price! < curr.price! ? prev : curr
+  );
+  const mostUrgent = itens.find(
+    (item: { mostUrgent: boolean }) => item.mostUrgent
+  );
   return (
     <>
       {ableTutorial && !isTourVisible ? (
@@ -162,7 +183,7 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
           spotlightClicks
           disableCloseOnEsc
           showSkipButton
-          run={true}
+          run={runTour}
           callback={(data: CallBackProps) => {
             if (data.status === "finished" || data.status === "skipped") {
               setRunTour(false);
@@ -170,7 +191,35 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
           }}
         />
       ) : null}
+
       <Swiper modules={[Navigation]} navigation breakpoints={slideResponsive}>
+        <SwiperSlide>
+          {" "}
+          <div className="flex flex-col items-center justify-center">
+            <div className="bg-[#AEBF8A] w-[260px] xxs:w-[280px] h-[330px] lg:w-[308px] lg:h-[360px] rounded-xl shadow-md pb-4 ">
+              <div className="flex flex-col p-4 h-full justify-between text-[#000]">
+                <h2 className="text-lg font-bold">Resumo</h2>
+                <p className="text-sm">
+                  <strong>Soma dos preços</strong>: R$ {totalPrice},00
+                </p>
+                <p className="text-sm">
+                  <strong>Item mais caro</strong>: {mostExpensive.title} (R${" "}
+                  {mostExpensive.price},00)
+                </p>
+                <p className="text-sm">
+                  <strong>Item mais barato</strong>: {cheapest.title} (R${" "}
+                  {cheapest.price},00)
+                </p>
+                {mostUrgent ? (
+                  <p className="text-sm">
+                    <strong>Item mais urgente</strong>: {mostUrgent.title} (R${" "}
+                    {mostUrgent.price},00)
+                  </p>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
         {itens.map((item: any) => (
           <SwiperSlide key={item.id}>
             <div className="flex flex-col items-center justify-center">
@@ -191,7 +240,7 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
                       <div
                         className={`ml-2 w-3 h-3 rounded-full ${getUrgencyColor(
                           item.urgency
-                        )}`}
+                        )}   `}
                         title={`Urgency: ${item.urgency}`}
                       ></div>
                     </div>
@@ -223,4 +272,4 @@ const PatrimoyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
   );
 };
 
-export default PatrimoyCarrousel;
+export default PatrimonyCarrousel;
