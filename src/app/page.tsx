@@ -1,5 +1,6 @@
-import AudioCard from "../../components/audio";
-import StreamingCard from "../../components/streaming";
+import AudioCard from "@/app/components/audio";
+import StreamingCard from "@/app/components/streaming";
+
 
 const Section = ({
   title,
@@ -8,18 +9,16 @@ const Section = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <div>
-    <h1 className="text-3xl font-bold underline mb-12 flex justify-center mt-12">
-      {title}
-    </h1>
-    {children}
+  <div className="my-12">
+    <h1 className="text-3xl font-bold underline mb-6 text-center">{title}</h1>
+    <div>{children}</div>
   </div>
 );
 
 export default function Home() {
   return (
-    <main className="size-screen bg-transparent">
-      <div className="flex flex-col gap-40">
+    <main className="min-h-screen bg-transparent p-6">
+      <div className="flex flex-col gap-20">
         <Section title="Lista de compras do Audio">
           <AudioCard />
         </Section>

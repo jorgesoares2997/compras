@@ -17,7 +17,7 @@ interface Item {
   title?: string;
   subtitle?: string;
   local?: string;
-  image?: any;
+  image?: string;
   price?: number;
   urgency?: string;
   link?: string;
@@ -225,7 +225,7 @@ const PatrimonyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
             <div className="flex flex-col items-center justify-center">
               <div className="bg-[#F2D4AE] w-[260px] xxs:w-[280px] h-[330px] lg:w-[308px] lg:h-[360px] rounded-xl shadow-md pb-4 ">
                 <div className="flex items-center justify-center lg:h-[125px] h-[120px]">
-                  <Image
+                  <img
                     src={item.image}
                     alt="imagem"
                     className="rounded-t-xl h-full flex justify-center object-cover"
