@@ -1,7 +1,6 @@
 import AudioCard from "@/app/components/audio";
 import StreamingCard from "@/app/components/streaming";
 
-
 const Section = ({
   title,
   children,
@@ -17,14 +16,18 @@ const Section = ({
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-transparent p-6">
+    <main className="min-h-screen bg-transparent ">
       <div className="flex flex-col gap-20">
-        <Section title="Lista de compras do Audio">
-          <AudioCard />
-        </Section>
-        <Section title="Lista de compras do Streaming">
-          <StreamingCard />
-        </Section>
+        <div className="mb-12">
+          <Section title="Lista de compras do Audio">
+            <AudioCard />
+          </Section>
+        </div>
+        <div className="mb-12">
+          <Section title="Lista de compras do Streaming">
+            <StreamingCard />
+          </Section>
+        </div>
       </div>
     </main>
   );
