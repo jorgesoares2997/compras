@@ -228,7 +228,7 @@ const PatrimonyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
                   <img
                     src={item.image}
                     alt="imagem"
-                    className="rounded-t-xl h-full flex justify-center object-cover"
+                    className="rounded-t-xl bg-cover w-full h-full"
                   />
                 </div>
                 <div className="flex flex-col p-2 h-[160px] justify-around lg:w-[320px] sm:h-[240] lg:h-[180px]">
