@@ -1,16 +1,19 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.css";
+import { Edit, Trash2 } from "lucide-react";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
+
+import { useCarrouselStore } from "@/store/tutorial-store";
+import axios from "axios";
+import { useEffect } from "react";
+import Joyride, { CallBackProps } from "react-joyride";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import Joyride, { CallBackProps } from "react-joyride";
-import { useEffect } from "react";
-import { useCarrouselStore } from "@/store/tutorial-store";
+import { useRouter } from "next/navigation";
 
 interface Item {
   id?: number;
@@ -64,6 +67,21 @@ const slideResponsive = {
   },
 };
 
+const handleDelete = async (id: number) => {
+  if (!confirm("Tem certeza que deseja excluir este item?")) return;
+
+  try {
+    await axios.delete(`http://localhost:8080/api/courses/${id}`);
+    alert("Item excluído com sucesso!");
+
+    // Recarregar a página
+    window.location.reload();
+  } catch (error) {
+    console.error("Erro ao excluir o item:", error);
+    alert("Erro ao excluir o item. Tente novamente.");
+  }
+};
+
 const getUrgencyColor = (urgency: string | undefined) => {
   switch (urgency) {
     case "high":
@@ -78,6 +96,7 @@ const getUrgencyColor = (urgency: string | undefined) => {
 };
 
 const PatrimonyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
+  const router = useRouter();
   const {
     runTour,
     isTourVisible,
@@ -106,6 +125,13 @@ const PatrimonyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
     return null;
   }
 
+  const handleEdit = (id: string) => {
+    // Aqui pode abrir um modal ou redirecionar para a página de edição
+    alert(`Abrindo edição para o item ID: ${id}`);
+
+    router.push(`/edit/${id}`);
+  };
+
   const totalPrice = itens.reduce(
     (acc: any, item: { price: any }) => acc + (item.price || 0),
     0
@@ -120,6 +146,7 @@ const PatrimonyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
   const mostUrgent = itens.find(
     (item: { mostUrgent: boolean }) => item.mostUrgent
   );
+
   return (
     <>
       {ableTutorial && !isTourVisible ? (
@@ -222,8 +249,24 @@ const PatrimonyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
         </SwiperSlide>
         {itens.map((item: any) => (
           <SwiperSlide key={item.id}>
-            <div className="flex flex-col items-center justify-center">
-              <div className="bg-[#F2D4AE] w-[260px] xxs:w-[280px] h-[330px] lg:w-[308px] lg:h-[360px] rounded-xl shadow-md pb-4 ">
+            <div className="flex flex-col items-center justify-center relative">
+              <div className="bg-[#F2D4AE] w-[260px] xxs:w-[280px] h-[330px] lg:w-[308px] lg:h-[360px] rounded-xl shadow-md pb-4">
+                {/* Ícones de Ação */}
+                <div className="absolute top-2 right-2 flex gap-2">
+                  <button
+                    onClick={() => handleEdit(item.id)}
+                    className="text-gray-600 hover:text-blue-500"
+                  >
+                    <Edit size={18} />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className="text-gray-600 hover:text-red-500"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                </div>
+
                 <div className="flex items-center justify-center lg:h-[125px] h-[120px]">
                   <img
                     src={item.image}

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+input, button {
+    position: relative;
+    z-index: 10;
+  }

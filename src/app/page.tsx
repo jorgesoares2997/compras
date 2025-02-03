@@ -1,5 +1,6 @@
 import AudioCard from "@/app/components/audio";
 import StreamingCard from "@/app/components/streaming";
+import FormularioPatrimonio from "./components/formulario";
 
 const Section = ({
   title,
@@ -26,6 +27,11 @@ export default function Home({ pageProps }: any) {
         <div className="mb-12">
           <Section title="Lista de compras do Streaming">
             <StreamingCard />
+          </Section>
+        </div>
+        <div className="mb-12">
+          <Section title="Adicione mais itens">
+            <FormularioPatrimonio />
           </Section>
         </div>
       </div>
