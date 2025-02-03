@@ -14,7 +14,7 @@ const Section = ({
   </div>
 );
 
-export default function Home() {
+export default function Home({ pageProps }: any) {
   return (
     <main className="min-h-screen bg-transparent ">
       <div className="flex flex-col gap-20">

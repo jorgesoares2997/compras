@@ -39,7 +39,7 @@ const AudioCard = () => {
 
   useEffect(() => {
     axios
-      .get("./audio.json")
+      .get("/localhost:8080/api/courses")
       .then((response) => {
         setThings(response.data || []);
       })

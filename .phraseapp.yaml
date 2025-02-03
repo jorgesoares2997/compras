@@ -1,0 +1,14 @@
+phraseapp:
+  access_token: "d2e34ff52ac87ba62f5a2dbcb8afe8b0c969f451cfc414b16355705223fae911"
+  project_id: "278e0952af91a7620a115a6173375bba "
+  file_format: "simple_json" # Formato padrão JSON para traduções
+  push:
+    sources:
+      - file: "./locales/<locale>.json"
+        params:
+          locale_id: "<locale>"
+  pull:
+    targets:
+      - file: "./locales/<locale>.json"
+        params:
+          locale_id: "<locale>"
