@@ -20,11 +20,10 @@ const EditForm = () => {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
-  // Carregar os dados do item ao montar o componente
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:8080/api/courses/${id}`) // Sua API para buscar os dados do item
+        .get(`http://localhost:8080/api/courses/${id}`) 
         .then((response) => {
           setFormData(response.data);
           setLoading(false);
@@ -40,18 +39,13 @@ const EditForm = () => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
-    setMessage("");
-
+  
     try {
-      const response = await axios.put(
-        `http://localhost:8080/api/courses/${id}`,
-        formData
-      );
-      setMessage("Item editado com sucesso!");
+      await axios.put(`http://localhost:8080/api/courses/${id}`, formData);
+      window.alert("Item editado com sucesso!");
       setFormData({
         title: "",
         subtitle: "",
@@ -61,14 +55,14 @@ const EditForm = () => {
         urgency: "",
         link: "",
       });
+      window.location.href = "/"; // Redireciona para a página inicial
     } catch (error) {
-      setMessage("Erro ao editar item. Tente novamente.");
+      window.alert("Erro ao editar item. Tente novamente.");
       console.error("Erro ao editar os dados:", error);
     } finally {
       setLoading(false);
     }
   };
-
   if (loading) return <div>Carregando...</div>;
 
   return (
