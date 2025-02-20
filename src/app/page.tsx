@@ -1,6 +1,7 @@
 import AudioCard from "@/app/components/audio";
 import StreamingCard from "@/app/components/streaming";
 import FormularioPatrimonio from "./components/formulario";
+import Comments from "./components/comments";
 
 const Section = ({
   title,
@@ -34,6 +35,7 @@ export default function Home({ pageProps }: any) {
             <FormularioPatrimonio />
           </Section>
         </div>
+        {/* <Comments /> */}
       </div>
     </main>
   );

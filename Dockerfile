@@ -4,23 +4,24 @@ FROM node:latest
 # Define o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copia apenas os arquivos do package.json e package-lock.json primeiro (para aproveitar o cache do Docker)
-COPY package*.json ./
+# Copia os arquivos necessários primeiro para otimizar cache
+COPY package.json package-lock.json ./
 
-# Instala as dependências antes de copiar o restante do código
+# Instala as dependências
 RUN npm install
 
-# Copia todo o código fonte para o container
+# Copia o restante do código para o container
 COPY . .
 
-# Define a variável de ambiente para permitir acesso externo
-ENV HOST 0.0.0.0
+# Define variável para permitir acesso externo
+ENV HOST=0.0.0.0
+ENV PORT=3000
 
-# Constrói o projeto Next.js
+# Gera o build da aplicação
 RUN npm run build
 
 # Expõe a porta 3000
 EXPOSE 3000
 
-# Define o comando para iniciar a aplicação
-CMD ["npm", "run", "dev"]
+# Inicia a aplicação em modo de produção
+CMD ["npm", "run", "start"]
