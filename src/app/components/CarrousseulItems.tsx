@@ -71,7 +71,9 @@ const handleDelete = async (id: number) => {
   if (!confirm("Tem certeza que deseja excluir este item?")) return;
 
   try {
-    await axios.delete(`http://localhost:8080/api/courses/${id}`);
+    await axios.delete(
+      `https://backend-compras.onrender.com/api/courses/${id}`
+    );
     alert("Item excluído com sucesso!");
 
     // Recarregar a página
@@ -126,7 +128,6 @@ const PatrimonyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
   }
 
   const handleEdit = (id: string) => {
-    // Aqui pode abrir um modal ou redirecionar para a página de edição
     alert(`Abrindo edição para o item ID: ${id}`);
 
     router.push(`/edit/${id}`);
@@ -149,7 +150,7 @@ const PatrimonyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
 
   return (
     <>
-      {ableTutorial && !isTourVisible ? (
+      {ableTutorial && isTourVisible ? (
         <Joyride
           hideCloseButton
           steps={[
@@ -252,20 +253,6 @@ const PatrimonyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
             <div className="flex flex-col items-center justify-center relative">
               <div className="bg-[#F2D4AE] w-[260px] xxs:w-[280px] h-[330px] lg:w-[308px] lg:h-[360px] rounded-xl shadow-md pb-4">
                 {/* Ícones de Ação */}
-                <div className="absolute top-2 right-2 flex gap-2">
-                  <button
-                    onClick={() => handleEdit(item.id)}
-                    className="text-gray-600 hover:text-blue-500"
-                  >
-                    <Edit size={18} />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="text-gray-600 hover:text-red-500"
-                  >
-                    <Trash2 size={18} />
-                  </button>
-                </div>
 
                 <div className="flex items-center justify-center lg:h-[125px] h-[120px]">
                   <img
@@ -295,6 +282,19 @@ const PatrimonyCarrousel = ({ itens, ableTutorial }: CarrouselProps | any) => {
                   </div>
                 </div>
                 <div className="flex justify-between px-4 w-full">
+                  <button
+                    onClick={() => handleEdit(item.id)}
+                    className="rounded-xl bg-[#aebf8a] p-2 text-black hover:text-blue-500 transition-colors duration-300"
+                  >
+                    <Edit size={18} />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className="rounded-xl bg-[#aebf8a] p-2 text-black hover:text-red-500 transition-colors duration-300"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+
                   <div className="bg-[#AEBF8A]  text-[12px] xxs:text-[14px] text-[#000] flex items-center px-2 gap-2 rounded-2xl h-[32px] joyride-price">
                     <span>R$ {item.price},00</span>
                   </div>

@@ -23,7 +23,7 @@ const EditForm = () => {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:8080/api/courses/${id}`) 
+        .get(`https://backend-compras.onrender.com/api/courses/${id}`) 
         .then((response) => {
           setFormData(response.data);
           setLoading(false);
@@ -44,7 +44,7 @@ const EditForm = () => {
     setLoading(true);
   
     try {
-      await axios.put(`http://localhost:8080/api/courses/${id}`, formData);
+      await axios.put(`https://backend-compras.onrender.com/api/courses/${id}`, formData);
       window.alert("Item editado com sucesso!");
       setFormData({
         title: "",

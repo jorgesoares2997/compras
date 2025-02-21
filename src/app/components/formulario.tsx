@@ -27,7 +27,7 @@ const FormularioPatrimonio = () => {
     setMessage("");
     
     try {
-      const response = await axios.post("http://localhost:8080/api/courses", formData);
+      const response = await axios.post("https://backend-compras.onrender.com/api/courses", formData);
       setMessage("Item adicionado com sucesso!");
       setFormData({
         title: "",

@@ -1,1 +1,1 @@
-export const API_URL = "http://localhost:8080"; // ou a URL da sua API online
+export const API_URL = "https://backend-compras.onrender.com"; // ou a URL da sua API online
