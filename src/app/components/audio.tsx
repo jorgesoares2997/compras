@@ -67,7 +67,14 @@ const AudioCard = () => {
         {things.length > 0 ? (
           <PatrimonyCarrousel ableTutorial={true} itens={things} />
         ) : (
-          <p>Carregando itens...</p>
+          <div className="flex justify-center items-center h-44">
+            <div
+              className="animate-spin rounded-full h-10 w-10 border-2"
+              style={{
+                borderImage: "linear-gradient(to right, blue, purple) 1",
+              }}
+            ></div>
+          </div>
         )}
       </div>
       <TourSteps run={run} steps={steps} />

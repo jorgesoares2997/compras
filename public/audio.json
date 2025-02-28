@@ -1,51 +1,30 @@
 [
   {
-    "id": 1,
     "title": "Microfone headset multibanda",
     "subtitle": "Ideal para apresentações teatrais, oferecendo captação clara e alta fidelidade.",
     "local": "Prazeres",
-    "image": "/assets/images/headset.webp",
+    "image": "https://http2.mlstatic.com/D_NQ_NP_2X_788225-MLB72427015459_102023-F.webp",
     "price": 1999,
     "urgency": "medium",
     "link": "https://produto.mercadolivre.com.br/MLB-2831070846-microfone-sem-fio-quadruplo-ksr-pro-kt4-head-80-canais-_JM"
   },
   {
-    "id": 2,
     "title": "Cabos Balanceados x 5",
     "subtitle": "Essenciais para reposição de cabos ausentes, garantindo sinal limpo e sem ruídos, os ideais são os de 5 metros.",
     "local": "Prazeres",
-    "image": "/assets/images/xlr.webp",
+    "image": "https://http2.mlstatic.com/D_NQ_NP_2X_728892-MLB73800435680_012024-F.webp",
     "price": 78,
     "urgency": "high",
     "link": "https://produto.mercadolivre.com.br/MLB-4353669688-cabo-microfone-balanceado-santo-angelo-xlr-457m-_JM",
     "mostUrgent": true
   },
-  {
-    "id": 3,
-    "title": "Carregador de bateria 9v",
-    "subtitle": "Perfeito para manter instrumentos carregados e prontos para performance.",
-    "local": "Prazeres",
-    "image": "/assets/images/carregador.webp",
-    "price": 42,
-    "urgency": "medium",
-    "link": "https://www.mercadolivre.com.br/carregador-de-pilhas-baterias-bivolt-auto-stop-mox-mo-cp50/p/MLB29073930"
-  },
-  {
-    "id": 4,
-    "title": "Almofadas Akg K72",
-    "subtitle": "Conforto e qualidade de som para fones de monitoramento em longas sessões.",
-    "local": "Prazeres",
-    "image": "/assets/images/fone.webp",
-    "price": 130,
-    "urgency": "low",
-    "link": "https://produto.mercadolivre.com.br/MLB-3759088843-headband-almofada-gel-para-fone-de-ouvido-akg-k52-k72-k92-_JM"
-  },
+
   {
     "id": 5,
     "title": "Tampa Microfone sem fio Shure",
     "subtitle": "Substitua partes danificadas e mantenha o microfone sempre funcional.",
     "local": "Prazeres",
-    "image": "/assets/images/tampa.webp",
+    "image": "https://http2.mlstatic.com/D_NQ_NP_2X_886698-MLB70719913027_072023-F.webp",
     "price": 45,
     "urgency": "low",
     "link": "https://produto.mercadolivre.com.br/MLB-1005325129-tampa-bateria-microfone-sem-fio-shure-slx-pgx-original-_JM"
@@ -55,28 +34,19 @@
     "title": "Medusa 12 canais",
     "subtitle": "Centralize os cabos para uma organização impecável e pronta para eventos.",
     "local": "Prazeres",
-    "image": "/assets/images/medusa.webp",
-    "price": 1272,
+    "image": "https://http2.mlstatic.com/D_NQ_NP_2X_993527-MLU72637188581_112023-F.webp",
+    "price": 1261,
     "urgency": "low",
     "link": "https://www.mercadolivre.com.br/medusa-12-vias-com-conectores-combo-cirilo-cabos-25-metros/p/MLB22343869"
   },
-  {
-    "id": 7,
-    "title": "Canaleta Pvc x 3",
-    "subtitle": "Organize fios e cabos com praticidade, mantendo o ambiente limpo e seguro.",
-    "local": "Prazeres",
-    "image": "/assets/images/canaleta.webp",
-    "price": 74,
-    "urgency": "low",
-    "link": "https://produto.mercadolivre.com.br/MLB-3260897947-canaleta-recorte-aberto-cinza-50x50mm-2-metros-dutoplast-_JM"
-  },
+
   {
     "id": 8,
     "title": "Capa / Case teclado MX61",
     "subtitle": "Proteção total para transporte seguro do teclado durante eventos e viagens.",
     "local": "Prazeres",
-    "image": "/assets/images/capa.webp",
-    "price": 589,
+    "image": "https://http2.mlstatic.com/D_NQ_NP_2X_945930-MLB51734610702_092022-F.webp",
+    "price": 639,
     "urgency": "high",
     "link": "https://produto.mercadolivre.com.br/MLB-1025399907-case-estojo-para-teclado-yamaha-mx61-kromus-_JM"
   },
@@ -85,7 +55,7 @@
     "title": "Espumas microfone headset",
     "subtitle": "Reposição ideal para garantir clareza na captação e eliminar ruídos indesejados.",
     "local": "Prazeres",
-    "image": "/assets/images/espuma.webp",
+    "image": "https://http2.mlstatic.com/D_NQ_NP_2X_731862-MLB70057711488_062023-F.webp",
     "price": 15,
     "urgency": "medium",
     "link": "https://produto.mercadolivre.com.br/MLB-3734876012-espuma-de-microfone-headset-lapela-15x8mm-cor-bege-_JM"
